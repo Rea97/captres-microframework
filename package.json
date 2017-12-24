@@ -1,0 +1,19 @@
+{
+  "name": "captres-microframework",
+  "version": "0.1.0",
+  "description": "Little web framework built on top of nodejs modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rea97/captres-microframework.git"
+  },
+  "author": "Oziel Rea",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rea97/captres-microframework/issues"
+  },
+  "homepage": "https://github.com/Rea97/captres-microframework#readme"
+}
