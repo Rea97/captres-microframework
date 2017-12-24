@@ -1,11 +1,11 @@
-let http = require('http');
-let Router = require('./support/Router')
+let App = require('./support/Application')
 
 const port = process.env.PORT || 3000
-const host = process.env.host || '127.0.0.1'
+const host = process.env.HOST || '127.0.0.1'
 
-http.createServer((request, response) => {
-    response.end('hello')
-}).listen(port, host)
+let app = new App({port, host})
+let router = require('./routes')
 
-console.log(`Server listening at ${port}`)
+app.use('router', router)
+
+app.run()
