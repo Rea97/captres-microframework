@@ -2,7 +2,7 @@ let url = require('url')
 
 module.exports = class {
     constructor() {
-        this.routes = [{method: '', path: '', action: null}]
+        this.routes = []
     }
 
     add(path, action, method = 'GET') {
