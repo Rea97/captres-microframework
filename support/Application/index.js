@@ -14,16 +14,26 @@ module.exports = class {
         this.plugins[name] = plugin
     }
 
-    run() {
-        http.createServer((request, response) => {
-            for (const key in this.plugins) {
-                if (this.plugins.hasOwnProperty(key)) {
-                    const plugin = this.plugins[key];
-                    plugin.init(request, response)
-                }
+    make() {
+        for (const key in this.plugins) {
+            if (this.plugins.hasOwnProperty(key)) {
+                this[key] = this.plugins[key]
             }
+        }
+    }
 
-            response.end()
+    run(action) {
+        http.createServer((request, response) => {
+            if (typeof this.router !== 'undefined') {
+                this.router.init(request, response, this)
+            } else {
+                if (typeof action === 'undefined') {
+                    response.end()
+                    return
+                }
+                action(request, response)
+            }
+            
         }).listen(this.config.port, this.config.host)
         
         console.log(`Server listening at ${this.config.port}`)

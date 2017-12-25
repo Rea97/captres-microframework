@@ -25,14 +25,16 @@ module.exports = class {
         this.add(path, action, 'DELETE')
     }
 
-    init(req, res) {
+    init(req, res, app) {
+        this.app = app
+
         let path = url.parse(req.url).path
         let method = req.method
     
         let route = this.routes.filter(route => route.path === path && route.method === method)
         
         if (route.length === 1) {
-            route[0].action(req, res)
+            route[0].action.call(app, req, res)
             return;
         }
 
