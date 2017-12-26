@@ -2,12 +2,13 @@ let http = require('http')
 
 module.exports = class {
     constructor(config) {
-        const {port, host} = config
+        const {port, host, app_url} = config
         this.config = {}
         this.plugins = {}
 
         this.config.port = port
         this.config.host = host
+        this.app_url = app_url
     }
 
     use(name, plugin) {
@@ -39,6 +40,11 @@ module.exports = class {
             response.writeHead(status, headers)
             response.write(JSON.stringify(data))
 
+            response.end()
+        }
+        this.response.redirect = (url, status = 302, headers = {}) => {
+            headers['Location'] = this.app_url + url
+            response.writeHead(status, headers)
             response.end()
         }
     }
