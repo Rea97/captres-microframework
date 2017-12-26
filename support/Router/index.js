@@ -28,7 +28,7 @@ module.exports = class {
     init(req, res, app) {
         this.app = app
 
-        let path = url.parse(req.url).path
+        let path = url.parse(req.url).pathname
         let method = req.method
     
         let route = this.routes.filter(route => route.path === path && route.method === method)
