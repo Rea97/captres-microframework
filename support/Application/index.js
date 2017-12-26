@@ -33,6 +33,14 @@ module.exports = class {
 
             response.end()
         }
+        this.response.sendJson = (status = 200, data = {}, headers = {}) => {
+            headers['Content-Type'] = 'application/json'
+
+            response.writeHead(status, headers)
+            response.write(JSON.stringify(data))
+
+            response.end()
+        }
     }
 
     run(action) {

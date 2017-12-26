@@ -4,13 +4,13 @@ class WelcomeController {
     }
 
     store(request, response) {
-        response.writeHead(200, {'content-type': 'application/json'})
         let data = {
             name: request.params.name,
             age: request.params.age
         }
 
-        response.end(JSON.stringify(data))
+        this.response.sendJson(200, data)
+
     }
 }
 
