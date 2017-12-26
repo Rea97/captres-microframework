@@ -1,8 +1,14 @@
+let HtmlViewEngine = require('./HtmlViewEngine')
+
 class ViewEngine {
     constructor(path, engine, config = {}) {
         this.path = path
         this.engine = engine
         this.config = config
+        
+        if (typeof engine === 'undefined') {
+            this.engine = new HtmlViewEngine()
+        }
     }
 
     render(filePath, data) {
