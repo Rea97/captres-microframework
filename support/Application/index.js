@@ -25,7 +25,21 @@ module.exports = class {
     run(action) {
         http.createServer((request, response) => {
             if (typeof this.router !== 'undefined') {
-                this.router.init(request, response, this)
+                this.makeAppResponse(response)
+
+                let data = ''
+                request.params = {}
+                request.addListener('data', chunk => data += chunk)
+                request.addListener('end', () => {
+                    let params = data.split('&')
+                    params.forEach(param => {
+                        let key = param.split('=')[0]
+                        let value = param.split('=')[1]
+                        request.params[key] = value
+                    })
+                    
+                    this.router.init(request, response, this)
+                })
             } else {
                 if (typeof action === 'undefined') {
                     response.end()
