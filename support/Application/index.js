@@ -22,6 +22,19 @@ module.exports = class {
         }
     }
 
+    makeAppResponse(response) {
+        this.response = Object.create(response)
+        this.response.view = (path, data) => {
+            let html = this.view.render(path, data)
+
+            response.writeHead(200, {'content-type': 'text/html', 'content-length': html.length})
+            
+            response.write(html)
+
+            response.end()
+        }
+    }
+
     run(action) {
         http.createServer((request, response) => {
             if (typeof this.router !== 'undefined') {

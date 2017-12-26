@@ -1,8 +1,8 @@
 class WelcomeController {
     index(request, response) {
-        let html = this.view.render('/welcome.pug')
-        response.write(html)
-        response.end()
+        this.response.view('/welcome.pug')
+    }
+
     store(request, response) {
         response.writeHead(200, {'content-type': 'application/json'})
         let data = {
