@@ -1,4 +1,6 @@
 let http = require('http')
+let querystring = require('querystring')
+let url = require('url')
 
 module.exports = class {
     constructor(config) {
@@ -49,9 +51,16 @@ module.exports = class {
         }
     }
 
+    makeAppRequest(request) {
+        this.request = Object.create(request)
+
+        this.request.queryString = querystring.parse(url.parse(request.url).query)
+    }
+
     run(action) {
         http.createServer((request, response) => {
             if (typeof this.router !== 'undefined') {
+                this.makeAppRequest(request)
                 this.makeAppResponse(response)
 
                 let data = ''

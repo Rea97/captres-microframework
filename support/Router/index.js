@@ -5,6 +5,10 @@ module.exports = class {
         this.routes = []
     }
 
+    prefix(path, callback) {
+        
+    }
+
     add(path, action, method = 'GET') {
         this.routes.push({method, path, action})
     }

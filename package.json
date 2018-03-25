@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Rea97/captres-microframework#readme",
   "dependencies": {
+    "mongodb": "^3.0.1",
     "pug": "^2.0.0-rc.4"
   }
 }
